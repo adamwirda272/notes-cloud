@@ -1,6 +1,6 @@
 <script>
     import { navigate } from "../lib/func";
-    import { isMobile, isNavVisible } from "./states";
+    import { currentPage, isMobile, isNavVisible } from "./states";
     import { notes } from "../lib/memory";
     import CreateNoteBtn from "./CreateNoteBtn.svelte";
 
@@ -18,15 +18,17 @@
 
 </script>
 <style>
-    .und-list {
+    .container {
         width: 100%;
         height: 100%;
         margin: 0;
         display: flex;
         flex-direction: column;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
         transition: all 0.25s ease;
         padding: 20px;
+        text-wrap: nowrap;
     }
     li{
         list-style: none;
@@ -50,16 +52,19 @@
         font-size: medium;
         width: 100%;
         height: 100%;
-        font-weight: 600;
         padding: 5px;
+        padding-left: 15px;
     } .notes-icon {
         grid-area: icon;
+        color: var(--primary-color);
     } .notes-title {
         grid-area: title;
         padding-left: 5px;
         font-size: large;
     } .last-updated {
         grid-area: date;
+        font-size: small;
+        color: var(--secondary-text-color);
     }
 
     .notes-icon,.notes-title,.last-updated {
@@ -67,15 +72,15 @@
         align-items: center;
     }
 </style>
-<div class="und-list" style={`opacity:${$isNavVisible ? '1':'0'};`}>
+<div class="container" style={`opacity:${$isNavVisible ? '1':'0'};`}>
     {#each noteList as note}
-        <li>
+        <li style={`background-color:${$currentPage === '/notes/'+note.id ? 'var(--border-color)':'none'};`}>
             <div class="title-li" onclick={() => {navigate('/notes/' + note.id);closeNavOnMobile()}} onkeypress={null} role="button" tabindex=0>
-                <svg class="notes-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentcolor" viewBox="0 0 256 256"><path d="M90,96a6,6,0,0,1,6-6h64a6,6,0,0,1,0,12H96A6,6,0,0,1,90,96Zm6,38h64a6,6,0,0,0,0-12H96a6,6,0,0,0,0,12Zm32,20H96a6,6,0,0,0,0,12h32a6,6,0,0,0,0-12ZM222,48V156.69a13.94,13.94,0,0,1-4.1,9.9L166.59,217.9a13.94,13.94,0,0,1-9.9,4.1H48a14,14,0,0,1-14-14V48A14,14,0,0,1,48,34H208A14,14,0,0,1,222,48ZM48,210H154V160a6,6,0,0,1,6-6h50V48a2,2,0,0,0-2-2H48a2,2,0,0,0-2,2V208A2,2,0,0,0,48,210Zm153.52-44H166v35.52Z"></path></svg>
+                <svg class="notes-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentcolor" viewBox="0 0 256 256"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H156.69A15.92,15.92,0,0,0,168,219.31L219.31,168A15.92,15.92,0,0,0,224,156.69V48A16,16,0,0,0,208,32ZM96,88h64a8,8,0,0,1,0,16H96a8,8,0,0,1,0-16Zm32,80H96a8,8,0,0,1,0-16h32a8,8,0,0,1,0,16ZM96,136a8,8,0,0,1,0-16h64a8,8,0,0,1,0,16Zm64,68.69V160h44.7Z"></path></svg>
                 <span class="notes-title">{note.title}</span>
                 <span class="last-updated">{new Date(note.updatedAt).toLocaleString()}</span>
             </div>
         </li>
     {/each}
 </div>
-<CreateNoteBtn style='padding:5px' />
+<CreateNoteBtn style='padding-left:20px;padding-bottom:10px;padding-top:10px;opacity:{$isNavVisible ? '1':'0'};' />

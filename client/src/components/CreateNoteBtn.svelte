@@ -44,6 +44,8 @@
         user-select: none;
         gap: 5px;
         border-radius: 7px;
+        color: var(--primary-color);
+        font-weight: 600;
     } .div-btn:hover {
         background-color: var(--border-color);
     }

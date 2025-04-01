@@ -1,7 +1,6 @@
 <script>
   import { onMount } from "svelte";
   import Layout from "./Layout.svelte";
-  import { appTheme } from "./components/states";
 
   let CurrentPage = $state(null);
   let routes = $state({});
@@ -61,18 +60,8 @@
     window.addEventListener("app:navigate", async () => await loadPage(window.location.pathname));
   });
 </script>
-<style>
-  #root{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-</style>
-<div id="root" data-theme={$appTheme}>
-  {#if window.location.pathname === "/"}
-    <CurrentPage params={currentParams}/>
-  {:else}
-    <Layout Content={CurrentPage} params={currentParams} />
-  {/if}
-</div>
+{#if window.location.pathname === "/"}
+<CurrentPage params={currentParams}/>
+{:else}
+<Layout Content={CurrentPage} params={currentParams} />
+{/if}

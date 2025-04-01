@@ -25,6 +25,7 @@
                 return;
             }
             status = response.data.message;
+            sessionStorage.setItem('userInfo', JSON.stringify(response.data.credentials));
             setTimeout(() => {
                 window.location.href = '/notes'
             },500)

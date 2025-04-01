@@ -9,11 +9,14 @@ html, body, #app {
     overflow: hidden;
     background-color: var(--bg-color);
     text-rendering: optimizeSpeed;
+    overflow: hidden;
 }
 
 * {
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
+    scrollbar-color: red;
+    overscroll-behavior: none;
 }
 
 :root,
@@ -69,7 +72,7 @@ html, body, #app {
 .shadow-sm {
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 } .shadow-md {
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    box-shadow: 0 0 22px 10px rgb(0 0 0 / 0.1);
 }
 
 .center {
@@ -80,4 +83,17 @@ html, body, #app {
 
 .no-select {
     user-select: none;
+}
+
+::-webkit-scrollbar {
+    width: 5px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-text-color) !important;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--nav-bg) !important;
 }
