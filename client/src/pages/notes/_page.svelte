@@ -1,0 +1,1 @@
+<div class="center">there is no selected note.</div>
